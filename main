@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include <string.h>
+
+#include "common.h"
+#include "auth.h"
+#include "task.h"
+#include "priority_queue.h"
+#include "merge_sort.h"
+#include "circular_queue.h"
+#include "graph.h"
+#include "stack.h"
+
+void completeTask() {
+    int n;
+    showTasks();
+    printf("Task number completed: ");
+    scanf("%d", &n);
+    if (n < 1 || n > taskCount) {
+        printf("Invalid\n");
+        return;
+    }
+    push(tasks[n - 1]);
+    deleteTask(n - 1);
+}
+
+
+int main() {
+    char name[20], pass[20];
+    int choice, loggedIn = 0;
+
+    while (!loggedIn) {
+        printf("\n1. Signup  2. Login: ");
+        scanf("%d", &choice);
+        printf("Username: ");
+        scanf("%s", name);
+        printf("Password: ");
+        scanf("%s", pass);
+        if (choice == 1)
+            signup(name, pass);
+        else if (login(name, pass)) {
+            loggedIn = 1;
+            printf("Welcome %s\n", name);
+        } else
+            printf("Wrong username or password\n");
+    }
+
+    do {
+        printf("\n--- Student Study Planner ---\n");
+        printf("1. Add task\n2. Edit task\n3. Delete task\n4. Show tasks (sorted by deadline)\n");
+        printf("5. Suggest next task\n6. Complete task\n7. Show completed tasks\n");
+        printf("8. Undo last completed\n9. Add revision topic\n10. Revise next topic\n");
+        printf("11. Performance\n0. Exit\nChoice: ");
+        scanf("%d", &choice);
+
+        if (choice == 1) addTask();
+        else if (choice == 2) editTask();
+        else if (choice == 3) {
+            int n;
+            showTasks();
+            printf("Task number to delete: ");
+            scanf("%d", &n);
+            if (n >= 1 && n <= taskCount) deleteTask(n - 1);
+        }
+        else if (choice == 4) {
+            mergeSort(tasks, 0, taskCount - 1);
+            showTasks();
+        }
+        else if (choice == 5) suggestNext();
+        else if (choice == 6) completeTask();
+        else if (choice == 7) showCompleted();
+        else if (choice == 8) pop();
+        else if (choice == 9) {
+            char topic[30];
+            printf("Topic: ");
+            scanf("%s", topic);
+            enqueue(topic);
+        }
+        else if (choice == 10) reviseNext();
+        else if (choice == 11) performance();
+    } while (choice != 0);
+
+    return 0;
+}
