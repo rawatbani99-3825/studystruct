@@ -10,7 +10,7 @@ public:
     User()
     {
         username = "student ";
-        password = "1234";
+        password = "1234 ";
     }
     string getUsername()
     {
