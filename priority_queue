@@ -1,0 +1,48 @@
+struct Task heap[MAX];
+int heapSize = 0;
+
+void heapInsert(struct Task t) {
+    int i = heapSize;
+    heap[heapSize] = t;
+    heapSize++;
+    while (i > 0 && heap[(i - 1) / 2].priority < heap[i].priority) {
+        struct Task temp = heap[i];
+        heap[i] = heap[(i - 1) / 2];
+        heap[(i - 1) / 2] = temp;
+        i = (i - 1) / 2;
+    }
+}
+
+struct Task heapExtractMax() {
+    struct Task top = heap[0];
+    int i = 0;
+    heapSize--;
+    heap[0] = heap[heapSize];
+    while (1) {
+        int l = 2 * i + 1, r = 2 * i + 2, big = i;
+        struct Task temp;
+        if (l < heapSize && heap[l].priority > heap[big].priority) big = l;
+        if (r < heapSize && heap[r].priority > heap[big].priority) big = r;
+        if (big == i) break;
+        temp = heap[i];
+        heap[i] = heap[big];
+        heap[big] = temp;
+        i = big;
+    }
+    return top;
+}
+
+void suggestNext() {
+    int i;
+    struct Task t;
+    if (taskCount == 0) {
+        printf("No tasks\n");
+        return;
+    }
+    heapSize = 0;
+    for (i = 0; i < taskCount; i++)
+        heapInsert(tasks[i]);
+    t = heapExtractMax();
+    printf("Study this next: %s (priority %d)\n", t.subject, t.priority);
+}
+
