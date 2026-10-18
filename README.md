@@ -16,10 +16,6 @@ I worked on the **Analysis Module**, which provides an overview of tasks and hel
 - Implemented `showSubjectWise()` to analyze tasks according to individual subjects.
 - Helped users understand their task distribution and progress across subjects.
 
-### C. Revision Management
-- Worked on a circular queue-based revision system.
-- Organized revision tasks in a cyclic manner.
-
 ### D. Graph-Based Analysis
 - Worked with graph concepts to represent task relationships.
 - Used BFS (Breadth-First Search) for overall graph evaluation.
