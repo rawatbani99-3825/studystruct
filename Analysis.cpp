@@ -16,7 +16,7 @@ public:
         subjectNodes = &s;
     }
     void showOverall(int totalNodes) {
-        cout << "\n OVERALL ANALYSIS      \n";
+        cout << "\n OVERALL ANALYSIS     \n";
         vector<bool> visited(totalNodes, false);
         queue<int> q;
         for (int start = 0; start < totalNodes; start++) {
@@ -39,7 +39,7 @@ public:
         cout << endl;
     }
     void showSubjectWise() {
-        cout << "\n SUBJECT-WISE ANALYSIS      \n";
+        cout << "\n SUBJECT-WISE ANALYSIS     \n";
         for (int subject : *subjectNodes) {
             vector<bool> visited(names->size(), false);
             vector<int> stack;
