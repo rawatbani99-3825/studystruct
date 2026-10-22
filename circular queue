@@ -4,7 +4,7 @@ int front = 0, rear = -1, qcount = 0;
 
 void enqueue(char topic[]) {
     if (qcount == QSIZE) {
-        printf("Revision queue full\n");
+        printf("Revision queue full \n");
         return;
     }
     rear = (rear + 1) % QSIZE;
