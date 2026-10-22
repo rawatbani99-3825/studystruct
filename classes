@@ -9,7 +9,7 @@ private:
 public:
     User()
     {
-        username = "student";
+        username = "student ";
         password = "1234";
     }
     string getUsername()
